@@ -53,33 +53,33 @@
     }
 
     function get_pokemons() {
-      $.get( "http://cors.io/?u=https://pokevision.com/map/data/" + lat1 + "/" + lng1, function( data ) {
+      $.getJSON( "http://cors.io/?u=https://pokevision.com/map/data/" + lat1 + "/" + lng1,
+        function(data) {
+          pokemons = [];
+          $.each(data['pokemon'], function( index, value ) {
+            pokemon = value;
+            pokemon.distance = distance(pokemon.latitude, pokemon.longitude);
+            pokemon.time_remaining = Math.floor((pokemon.expiration_time - Date.now() / 1000) / 60);
+            pokemon.origin_latitude = lat1;
+            pokemon.origin_longitude = lng1;
+            pokemons.push(pokemon);
+          });
+          pokemons.sort(compare);
 
-        pokemons = [];
-        $.each(data['pokemon'], function( index, value ) {
-          pokemon = value;
-          pokemon.distance = distance(pokemon.latitude, pokemon.longitude);
-          pokemon.time_remaining = Math.floor((pokemon.expiration_time - Date.now() / 1000) / 60);
-          pokemon.origin_latitude = lat1;
-          pokemon.origin_longitude = lng1;
-          pokemons.push(pokemon);
-        });
-        pokemons.sort(compare);
+          filtered_pokemons = [];
+          previous_pokemonId = 0;
+          $.each(pokemons, function( index, value ) {
+            if (value.pokemonId != previous_pokemonId){
+              filtered_pokemons.push(value);
+            }
+            previous_pokemonId = value.pokemonId;
+          });
 
-        filtered_pokemons = [];
-        previous_pokemonId = 0;
-        $.each(pokemons, function( index, value ) {
-          if (value.pokemonId != previous_pokemonId){
-            filtered_pokemons.push(value);
-          }
-          previous_pokemonId = value.pokemonId;
-        });
-
-        $.get('pokemons.mst', function(template) {
-          var rendered = Mustache.render(template, {pokemons: filtered_pokemons});
-          $('#pokemons').html(rendered);
-        });
-      });
+          $.get('pokemons.mst', function(template) {
+            var rendered = Mustache.render(template, {pokemons: filtered_pokemons});
+            $('#pokemons').html(rendered);
+          });
+       });
     }
 
     function display_pokemons(position) {
