@@ -1,0 +1,41 @@
+h1 {
+  text-align: center;
+}
+
+button {
+  text-align: center;
+  margin: auto;
+  padding: 30px 50px;
+  display: block;
+}
+
+.intro {
+  font-size: 14px;
+  text-align: center;
+}
+
+div.pokemon {
+  border: 1px solid gray;
+  width: 120px;
+  height: 120px;
+  float: left;
+  margin: 10px;
+  text-align: center;
+}
+
+.pokemon img {
+  width: 60px;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.pokemon p {
+  margin: 0;
+}
+
+.pokemon a {
+  display: block;
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+}

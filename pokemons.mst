@@ -1,0 +1,9 @@
+{{#pokemons}}
+  <div class="pokemon">
+    <a href="https://www.google.com/maps/dir/{{origin_latitude}},{{origin_longitude}}/{{latitude}},{{longitude}}" target="_blank">
+      <img src="./images/{{pokemonId}}.png" alt="pokemon {{pokemonId}}" />
+      <p class="distance">~{{distance}}m</p>
+      <p class="time">{{time_remaining}}min</p>
+    </a>
+  </div>
+{{/pokemons}}
