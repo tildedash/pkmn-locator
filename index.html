@@ -53,7 +53,7 @@
     }
 
     function get_pokemons() {
-      $.getJSON( "http://cors.io/?u=https://pokevision.com/map/data/" + lat1 + "/" + lng1,
+      $.getJSON( "https://crossorigin.me/https://pokevision.com/map/data/" + lat1 + "/" + lng1,
         function(data) {
           pokemons = [];
           $.each(data['pokemon'], function( index, value ) {
